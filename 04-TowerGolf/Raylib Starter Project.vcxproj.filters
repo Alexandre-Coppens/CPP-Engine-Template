@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine">
+      <UniqueIdentifier>{a961b177-3ebc-4964-87ad-6ac0e5512716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game">
+      <UniqueIdentifier>{aaaf8842-6a73-47a2-84c0-066fd5fdc79b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources\Engine">
+      <UniqueIdentifier>{8acb993a-20dc-4c5d-8b43-cd83554ab5b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources\Game">
+      <UniqueIdentifier>{b993cd1c-06e8-49be-8518-cee437ff4cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources\Game\UI">
+      <UniqueIdentifier>{c8e5af4e-8f98-4210-b903-cf431df8c6a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\UI">
+      <UniqueIdentifier>{0278e25a-f119-4b7a-b272-643ce3749e56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources\Game\utils">
+      <UniqueIdentifier>{3473cbb8-e8ac-451b-8c9b-5c88f89c76b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\utils">
+      <UniqueIdentifier>{3259fd64-d85c-4d2d-ab33-d67098bb0ec2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AssetsList.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GolfBall.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="UIBackground.cpp">
+      <Filter>Fichiers sources\Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UITower.h">
+      <Filter>Fichiers de ressources\Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UITower.cpp">
+      <Filter>Fichiers sources\Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UINewTower.cpp">
+      <Filter>Fichiers sources\Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="TowerBible.cpp">
+      <Filter>Fichiers sources\Game\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GolfBible.cpp">
+      <Filter>Fichiers sources\Game\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GolfWaveSystem.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AssetsList.h">
+      <Filter>Fichiers de ressources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawScreen.h">
+      <Filter>Fichiers de ressources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Fichiers de ressources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Fichiers de ressources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GolfBall.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBackground.h">
+      <Filter>Fichiers de ressources\Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UINewTower.h">
+      <Filter>Fichiers de ressources\Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="TowerBible.h">
+      <Filter>Fichiers de ressources\Game\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GolfWaveSystem.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GolfBible.h">
+      <Filter>Fichiers de ressources\Game\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
