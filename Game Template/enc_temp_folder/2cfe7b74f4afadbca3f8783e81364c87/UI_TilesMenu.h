@@ -10,17 +10,21 @@ using std::string;
 using std::vector;
 using std::map;
 
-class Cursor : public Actor{
+class UI_TilesMenu : public Actor {
 private:
-    Vector2 scrollSpeed{ 150, 150 };
+    bool open{ false };
+    Rectangle interactibleBar{};
 
 public:
 
 private:
 public:
-    Cursor();
-    ~Cursor();
+    UI_TilesMenu();
+    ~UI_TilesMenu();
 
     void Update(Vector2* scroll);
     void Draw(Vector2* scroll);
+    void Clicked();
+
+    void OpenTilesTab();
 };

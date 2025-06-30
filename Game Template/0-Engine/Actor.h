@@ -12,9 +12,8 @@ using std::vector;
 using std::map;
 
 enum class ActorType {
-    Car,
-    Wall,
-    Background,
+    Actor,
+    UI,
     None
 };
 
@@ -70,6 +69,7 @@ public:
     static vector<Actor*> GetAllActors();
     static vector<vector<Actor*>>* GetAllActorsLayered();
     static vector<Actor*> GetAllActorsWith(ActorType type);
+    static vector<Actor*> GetAllActorsInCollisionVector2(Vector2 point);
     static vector<Actor*> GetAllActorsInCollisionRect(Rectangle collider);
     static vector<Actor*> GetAllActorsInCollisionCirc(Vector2 origin, float radius);
 

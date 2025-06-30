@@ -13,7 +13,6 @@ using std::map;
 class UI_TilesMenu : public Actor {
 private:
     bool open{ false };
-    Rectangle interactibleBar{};
 
 public:
 
@@ -22,9 +21,9 @@ public:
     UI_TilesMenu();
     ~UI_TilesMenu();
 
-    void Draw();
-    void Update();
-    int Clicked();
+    void Update(Vector2* scroll);
+    void Draw(Vector2* scroll);
+    void Clicked();
 
     void OpenTilesTab();
 };

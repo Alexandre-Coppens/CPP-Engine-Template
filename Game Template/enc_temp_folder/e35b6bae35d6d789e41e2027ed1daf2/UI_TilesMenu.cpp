@@ -1,8 +1,7 @@
 #include "UI_TilesMenu.h"
 
 UI_TilesMenu::UI_TilesMenu(){
-	position = Vector2{ 30, GetScreenHeight() * 0.375f };
-	size = Vector2{ 30, GetScreenHeight() * 0.250f };
+	interactibleBar = Rectangle{ 0, GetScreenHeight() * 0.375f, 30, GetScreenHeight() * 0.250f};
 }
 
 UI_TilesMenu::~UI_TilesMenu(){
@@ -12,10 +11,11 @@ void UI_TilesMenu::Update(Vector2* scroll){
 }
 
 void UI_TilesMenu::Draw(Vector2* scroll){
-	Rectangle interactibleBar{ position.x - scroll->x, position.y - scroll->y, size.x, size.y };
-	DrawRectanglePro(interactibleBar, Vector2Zero(), 0, BLACK);
 	if (open) {
 
+	}
+	else {
+		DrawRectanglePro(interactibleBar, Vector2Zero(), 0, BLACK);
 	}
 }
 

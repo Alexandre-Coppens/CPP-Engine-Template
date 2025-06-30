@@ -1,5 +1,4 @@
 #include "Actor.h"
-#include "GolfBall.h"
 
 map<string, Actor*> Actor::ActorList;
 vector<vector<Actor*>> Actor::ActorsByLayer;
@@ -30,9 +29,6 @@ void Actor::Draw(Vector2* scroll) {
 	Rectangle source{ 0, 0, sprite->width, sprite->height };
 	Rectangle dest{ position.x - scroll->x, position.y - scroll->y, size.x, size.y };
 	DrawTexturePro(*sprite, source, dest, Vector2{ size.x * 0.5f, size.y * 0.5f }, 0, color);
-}
-
-void Actor::Collided(){
 }
 
 Actor* Actor::CreateActor(const string id, int layer,Actor* actor){
@@ -77,6 +73,21 @@ vector<Actor*> Actor::GetAllActorsWith(ActorType type){
     return ret;
 }
 
+//Get every actors in a Specific Point
+vector<Actor*> Actor::GetAllActorsInCollisionVector2(Vector2 point)
+{
+	vector<Actor*> ret{};
+	for (auto const& i : ActorList) {
+		if (i.second->position.x + i.second->size.x >= point.x &&
+			i.second->position.x <= point.x &&
+			i.second->position.y + i.second->size.y >= point.y &&
+			i.second->position.y <= point.y) {
+			ret.push_back(const_cast<Actor*>(i.second));
+		}
+	}
+	return ret;
+}
+
 //Get every actors in Rectangle Collision
 vector<Actor*> Actor::GetAllActorsInCollisionRect(Rectangle collider)
 {
@@ -113,12 +124,6 @@ void Actor::DestroyActorList(){
 	ActorList.clear();
 }
 
-void Actor::MouseHover() {}
-
-void Actor::MouseHoverUI() {}
-
-void Actor::Clicked() {}
-
 void Actor::Destroy() {
 	needToDestroy = true;
 }
@@ -138,3 +143,14 @@ void Actor::RemoveActorFromLists(Actor* actor) {
 
 	delete actor;
 }
+
+//Function made to be modified
+
+void Actor::Collided() {}
+
+void Actor::MouseHover() {}
+
+void Actor::MouseHoverUI() {}
+
+void Actor::Clicked() {}
+

@@ -1,8 +1,6 @@
 #pragma once
 
 #include "raylib.h"
-#include "rlgl.h"
-#include "raymath.h"
 
 #include <string>
 #include <vector>
@@ -15,8 +13,7 @@ class Engine {
 private:
 	AssetList* assets{};
 	Vector2 scroll{};
-	Vector2 scrollSpeed{ 150, 150};
-
+	
 private:
     void CheckIfOutOfBound();
 
