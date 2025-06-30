@@ -1,4 +1,6 @@
 #include "UI_TilesMenu.h"
+#include "AssetsList.h"
+#include "Terrain.h"
 
 UI_TilesMenu::UI_TilesMenu(){
 	type = ActorType::UI;
@@ -10,19 +12,46 @@ UI_TilesMenu::~UI_TilesMenu(){
 }
 
 void UI_TilesMenu::Update(Vector2* scroll){
+	//Change textures
+	if (GetMouseWheelMove() > 0){
+		mouseScroll = Clamp(mouseScroll - mouseScrollSpeed, 0, mouseScrollMax);
+	}
+	if (GetMouseWheelMove() < 0) {
+		mouseScroll = Clamp(mouseScroll + mouseScrollSpeed, 0, mouseScrollMax);
+	}
 }
 
 void UI_TilesMenu::Draw(Vector2* scroll){
 	Rectangle interactibleBar{ position.x, position.y, size.x, size.y };
-	Rectangle menuBackground{ 0, GetScreenHeight() - GetScreenHeight() * 0.95f, 300, GetScreenHeight() * 0.9f };
 	DrawRectanglePro(interactibleBar, Vector2Zero(), 0, BLACK);
 	if (open) {
+		Rectangle menuBackground{ 0, GetScreenHeight() - GetScreenHeight() * 0.95f, 300, GetScreenHeight() * 0.9f };
 		DrawRectanglePro(menuBackground, Vector2Zero(), 0, LIGHTGRAY);
+
+		Rectangle source{ 0, 0, sprite->width, sprite->height };
+		Rectangle dest{ 0, 0, Terrain::tileSize.x, Terrain::tileSize.y };
+		Vector2 pos = Vector2{ menuBackground.x +15 + dest.width * 0.5f, menuBackground.y +15 - mouseScroll + dest.height};
+
+		for (auto i : AssetList::SpriteList) {
+			source = Rectangle{0, 0, (float)i.second.width, (float)i.second.height };
+			if (pos.x + dest.width >= menuBackground.width) {
+				pos.x = menuBackground.x + 15 + dest.width * 0.5f;
+				pos.y += dest.height + 15;
+			}
+			if (pos.y - dest.height * 0.5f > menuBackground.y && pos.y + dest.height * 0.5f < menuBackground.x + menuBackground.height) {
+				dest.x = pos.x;
+				dest.y = pos.y;
+				DrawTexturePro(i.second, source, dest, Vector2{ dest.width * 0.5f, dest.height * 0.5f }, 0, color);
+			}
+			pos.x += dest.width + 15;
+		}
+		mouseScrollMax = pos.y;
 	}
 }
 
 void  UI_TilesMenu::Clicked(){
 	open = !open;
+	mouseScroll = 0;
 	if(open) position = position = Vector2{ 300, GetScreenHeight() * 0.375f };
 	else position = position = Vector2{ 0, GetScreenHeight() * 0.375f };
 }

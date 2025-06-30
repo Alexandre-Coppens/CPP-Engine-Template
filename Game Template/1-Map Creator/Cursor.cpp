@@ -64,16 +64,6 @@ void Cursor::Update(Vector2* scroll){
 	if (IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN)) Terrain::AddNewTile(layer, rotation, cPos, AssetList::GetNameAtPosition(currentTexture));
 	if (IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_RIGHT)) Terrain::RemoveTile(layer, cPos);
 
-	//Change textures
-	if (GetMouseWheelMove() > 0 || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_LEFT_TRIGGER_1)) {
-		if (currentTexture == 0)currentTexture = AssetList::SpriteList.size() - 1;
-		else currentTexture--;
-	}
-	if (GetMouseWheelMove() < 0 || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_TRIGGER_1)) {
-		if (currentTexture == AssetList::SpriteList.size() - 1)currentTexture = 0;
-		else currentTexture++;
-	}
-
 	//Save / Load
 	if ((IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_S)) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_MIDDLE_RIGHT))Terrain::SaveMap("TowerPath");
 	if ((IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_O)) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_MIDDLE_LEFT))Terrain::LoadMap("TowerPath");

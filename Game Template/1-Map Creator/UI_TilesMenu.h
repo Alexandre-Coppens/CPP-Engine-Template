@@ -13,6 +13,9 @@ using std::map;
 class UI_TilesMenu : public Actor {
 private:
     bool open{ false };
+    float mouseScroll = 0;
+    float mouseScrollSpeed = 20;
+    float mouseScrollMax = 0;
 
 public:
 
