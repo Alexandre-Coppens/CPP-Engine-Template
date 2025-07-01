@@ -1,6 +1,7 @@
 #include "Cursor.h"
 #include "Terrain.h"
 #include "AssetsList.h"
+#include "UI_TilesMenu.h"
 
 #include "rlgl.h"
 #include "raymath.h"
@@ -48,16 +49,23 @@ void Cursor::Update(Vector2* scroll){
 	//Tiles placement
 	Vector2 mPos{ (int)floor((scroll->x + GetMouseX()) / Terrain::tileSize.x), (int)floor((scroll->y + GetMouseY()) / Terrain::tileSize.y) };
 	if (IsMouseButtonPressed(0)) {
-		vector<Actor*> actors = GetAllActorsInCollisionVector2(GetMousePosition());
-		if (actors.size() > 0) {
-			for (int i = 0; i < actors.size(); i++) {
-				if (actors[i]->type == ActorType::UI) {
-					actors[0]->Clicked();
-					break;
+		UI_TilesMenu* menu = static_cast<UI_TilesMenu*>(GetActorWithName("UITilesMenu"));
+		if (menu->currentTextureName != "" && menu->currentTextureName != ".") {
+			currentTexture = std::distance(AssetList::SpriteList.begin(), AssetList::SpriteList.find(menu->currentTextureName));
+			menu->Clicked();
+		}
+		else if(menu->currentTextureName != "."){
+			vector<Actor*> actors = GetAllActorsInCollisionVector2(GetMousePosition());
+			if (actors.size() > 0) {
+				for (int i = 0; i < actors.size(); i++) {
+					if (actors[i]->type == ActorType::UI) {
+						actors[0]->Clicked();
+						break;
+					}
 				}
 			}
+			else Terrain::AddNewTile(layer, rotation, mPos, AssetList::GetNameAtPosition(currentTexture));
 		}
-		else Terrain::AddNewTile(layer, rotation, mPos, AssetList::GetNameAtPosition(currentTexture));
 	}
 	if (IsMouseButtonPressed(1)) Terrain::RemoveTile(layer, mPos);
 	Vector2 cPos{ (int)floor((scroll->x + GetScreenWidth() * 0.5f) / Terrain::tileSize.x), (int)floor((scroll->y + Terrain::tileSize.y * 0.5f + GetScreenWidth() * 0.5f) / Terrain::tileSize.y) };

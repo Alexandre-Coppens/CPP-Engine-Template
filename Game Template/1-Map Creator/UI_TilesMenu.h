@@ -12,12 +12,13 @@ using std::map;
 
 class UI_TilesMenu : public Actor {
 private:
-    bool open{ false };
-    float mouseScroll = 0;
-    float mouseScrollSpeed = 20;
-    float mouseScrollMax = 0;
+    float mouseScroll{};
+    float mouseScrollSpeed = 50;
+    float mouseScrollMax{};
 
 public:
+    bool open{ false };
+    string currentTextureName{ "" };
 
 private:
 public:

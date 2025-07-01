@@ -25,12 +25,19 @@ void UI_TilesMenu::Draw(Vector2* scroll){
 	Rectangle interactibleBar{ position.x, position.y, size.x, size.y };
 	DrawRectanglePro(interactibleBar, Vector2Zero(), 0, BLACK);
 	if (open) {
+		currentTextureName = "";
+
 		Rectangle menuBackground{ 0, GetScreenHeight() - GetScreenHeight() * 0.95f, 300, GetScreenHeight() * 0.9f };
 		DrawRectanglePro(menuBackground, Vector2Zero(), 0, LIGHTGRAY);
 
 		Rectangle source{ 0, 0, sprite->width, sprite->height };
 		Rectangle dest{ 0, 0, Terrain::tileSize.x, Terrain::tileSize.y };
 		Vector2 pos = Vector2{ menuBackground.x +15 + dest.width * 0.5f, menuBackground.y +15 - mouseScroll + dest.height};
+
+		if (menuBackground.x <= GetMouseX() && menuBackground.x + menuBackground.width >= GetMouseX() &&
+			menuBackground.y <= GetMouseY() && menuBackground.y + menuBackground.height >= GetMouseY()) {
+			currentTextureName = ".";
+		}
 
 		for (auto i : AssetList::SpriteList) {
 			source = Rectangle{0, 0, (float)i.second.width, (float)i.second.height };
@@ -42,6 +49,10 @@ void UI_TilesMenu::Draw(Vector2* scroll){
 				dest.x = pos.x;
 				dest.y = pos.y;
 				DrawTexturePro(i.second, source, dest, Vector2{ dest.width * 0.5f, dest.height * 0.5f }, 0, color);
+				if (dest.x - dest.width * 0.5f <= GetMouseX() && dest.x + dest.width * 0.5f >= GetMouseX() &&
+					dest.y - dest.height * 0.5f <= GetMouseY() && dest.y + dest.height * 0.5f >= GetMouseY()) {
+					currentTextureName = i.first;
+				}
 			}
 			pos.x += dest.width + 15;
 		}
@@ -52,8 +63,9 @@ void UI_TilesMenu::Draw(Vector2* scroll){
 void  UI_TilesMenu::Clicked(){
 	open = !open;
 	mouseScroll = 0;
-	if(open) position = position = Vector2{ 300, GetScreenHeight() * 0.375f };
-	else position = position = Vector2{ 0, GetScreenHeight() * 0.375f };
+	currentTextureName = "";
+	if(open) position = Vector2{ 300, GetScreenHeight() * 0.375f };
+	else position = Vector2{ 0, GetScreenHeight() * 0.375f };
 }
 
 void UI_TilesMenu::OpenTilesTab(){

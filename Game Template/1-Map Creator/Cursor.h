@@ -13,6 +13,7 @@ using std::map;
 class Cursor : public Actor{
 private:
     Vector2 scrollSpeed{ 150, 150 };
+    string currentTextureName = "";
 
 public:
 
