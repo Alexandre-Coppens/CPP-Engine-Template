@@ -3,14 +3,14 @@
 #include "AssetsList.h"
 
 Texture2D AssetList::textureTemp;
-Music AssetList::music;
+map<string, Music> AssetList::musicList;
 AssetList* AssetList::instance = nullptr;
 map<string, Font> AssetList::textFont;
-map<string, Texture2D> AssetList:: SpriteList;
+map<string, Texture2D> AssetList:: textureList;
 map<string, Sound> AssetList:: soundList;
 
 AssetList::AssetList() {
-    if (SpriteList.size() > 0) return;
+    if (textureList.size() > 0) return;
     LoadRessources();
 }
 
@@ -108,7 +108,7 @@ void AssetList::LoadSpriteFolder(string path) {
 
 string AssetList::GetNameAtPosition(int position) {
     int i = 0;
-    for (auto s : SpriteList) {
+    for (auto s : textureList) {
         if (i == position) return s.first;
         i++;
     }
@@ -118,7 +118,7 @@ string AssetList::GetNameAtPosition(int position) {
 void AssetList::LoadTexture2D(string name, string link) {
     Image temp = LoadImage(link.c_str());
     textureTemp = LoadTextureFromImage(temp);
-    SpriteList[name] = textureTemp;
+    textureList[name] = textureTemp;
     UnloadImage(temp);
 }
 

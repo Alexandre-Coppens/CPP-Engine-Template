@@ -23,18 +23,49 @@ protected:
     static map<string, Actor*> ActorList;
     static vector<vector<Actor*>> ActorsByLayer;
 
-public:
     bool enabled{ true };
     bool hasCollision{ true };
-    bool needToDestroy{ false };
+    bool onDestroyList{ false };
 
     string name{ "" };
     Vector2 position{ 0,0 };
     Vector2 size{ 0,0 };
     short layer{ 0 };
-    Texture2D* sprite{};
-    Color color{WHITE};
-    ActorType type{ ActorType::None};
+    Texture2D* texture{ nullptr };
+    Color color{ WHITE };
+    ActorType type{ ActorType::None };
+
+public:
+    bool GetEnabled() { return this->enabled; }
+    void SetEnabled(bool enabled) { this->enabled = enabled; }
+
+    bool GetHasCollision() { return hasCollision; }
+    void SetHasCollision(bool hasCollision) { this->hasCollision = hasCollision; }
+
+    bool GetOnDestroyList() { return onDestroyList; }
+    void SetOnDestroyList(bool onDestroyList) { this->onDestroyList = onDestroyList; }
+
+
+    string GetName() { return name; }
+    void SetName(string name) { this->name = name; }
+
+    Vector2 GetPosition() { return position; }
+    void SetPosition(Vector2 position) { this->position = position; }
+
+    Vector2 GetSize() { return size; }
+    void SetSize(Vector2 size) { this->size = size; }
+
+    short GetLayer() { return layer; }
+    void SetLayer(bool layer) { this->layer = layer; }
+
+    Texture2D* GetTexture() { return texture; }
+    void SetTexture(Texture2D* texture) { this->texture = texture; }
+
+    Color GetColor() { return color; }
+    void SetColor(Color color) { this->color = color; }
+
+    ActorType GetActorType() { return type; }
+    void SetActorType(ActorType type) { this->type = type; }
 
 private:
 protected:
@@ -43,7 +74,7 @@ public:
     Actor(Vector2 _pos = Vector2Zero(),
         Vector2 _size = Vector2Zero(),
         ActorType _type = ActorType::None,
-        Texture2D* _sprite = &AssetList::SpriteList["Unknown"],
+        Texture2D* _sprite = AssetList::GetTexture("Unknown"),
         Color _color = WHITE);
     virtual ~Actor();
     

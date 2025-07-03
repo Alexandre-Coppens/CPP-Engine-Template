@@ -15,6 +15,10 @@ private:
     Vector2 scrollSpeed{ 150, 150 };
     string currentTextureName = "";
 
+    int currentTexture{ 0 };
+    int placementLayer{ 0 };
+    int placementRotation{ 0 };
+
 public:
 
 private:
@@ -22,6 +26,6 @@ public:
     Cursor();
     ~Cursor();
 
-    void Update(Vector2* scroll);
-    void Draw(Vector2* scroll);
+    void Update(Vector2* scroll)override;
+    void Draw(Vector2* scroll)override;
 };

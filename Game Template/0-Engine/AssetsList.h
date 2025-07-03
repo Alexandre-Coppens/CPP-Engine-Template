@@ -13,12 +13,19 @@ class AssetList {
 private:
     static Texture2D textureTemp;
 
-public:
-    static Music music;
+    static map<string, Music> musicList;
     static map<string, Sound> soundList;
     static map<string, Font> textFont;
-    static map<string, Texture2D> SpriteList;
+    static map<string, Texture2D> textureList;
     static AssetList* instance;
+
+public:
+    static Music* GetMusic(string name) { return &musicList[name]; }
+    static Sound* GetSound(string name) { return &soundList[name]; }
+    static Font* GetFont(string name) { return &textFont[name]; }
+    static Texture2D* GetTexture(string name) { return &textureList[name]; }
+
+    static map<string, Texture2D>* GetTextureList() { return &textureList; }
 
 private:
     AssetList();

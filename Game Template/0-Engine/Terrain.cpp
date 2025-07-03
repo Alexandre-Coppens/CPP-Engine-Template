@@ -69,7 +69,7 @@ void Terrain::RemoveTile(int layer,  Vector2 pos){
 }
 
 void Terrain::AddToDictionary(int index, string name) {
-	if (AssetList::SpriteList.find(name) == AssetList::SpriteList.end()) {
+	if (AssetList::GetTextureList()->find(name) == AssetList::GetTextureList()->end()) {
 		dictionary[index] = "Unknown";
 	}
 	else {

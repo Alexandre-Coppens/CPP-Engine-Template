@@ -16,12 +16,12 @@ int main()
 
 	srand(time(NULL));
     while (!WindowShouldClose()){
-        UpdateMusicStream(AssetList::music);
+        //UpdateMusicStream(AssetList::music);
 		engine.Update();
 		engine.Draw();
 	}
 
-    UnloadMusicStream(AssetList::music);
+    //UnloadMusicStream(AssetList::music);
     CloseAudioDevice();
     CloseWindow();
 }

@@ -16,7 +16,7 @@ Engine::Engine() {
 
 void Engine::Start(){
 	assets = AssetList::GetInstance();
-	terrain.tileSize = Vector2{ 50,50 };
+	terrain.SetTileSize(Vector2{ 50,50 });
 	scroll = { GetScreenWidth() * 0.5f ,GetScreenHeight() * 0.5f };
 
 	//Create Objects Here
@@ -27,12 +27,12 @@ void Engine::Start(){
 
 void Engine::Update() {
 
-	vector<Actor*> goList = Actor::GetAllActors();
-	for (int i = 0; i < goList.size(); i++) {
-		if (goList[i]->needToDestroy) {
-			Actor::RemoveActorFromLists(goList[i]);
+	vector<Actor*> actorList = Actor::GetAllActors();
+	for (int i = 0; i < actorList.size(); i++) {
+		if (actorList[i]->GetOnDestroyList()) {
+			Actor::RemoveActorFromLists(actorList[i]);
 		}
-		else if (goList[i]->enabled) goList[i]->Update(&scroll);
+		else if (actorList[i]->GetEnabled()) actorList[i]->Update(&scroll);
 	}
 }
 

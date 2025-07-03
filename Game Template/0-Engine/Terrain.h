@@ -11,7 +11,6 @@ using std::vector;
 using std::map;
 
 class Terrain {
-private:
 public:
     struct Tile {
         Vector2 position{};
@@ -20,11 +19,22 @@ public:
         int dictionaryTexture{};
     };
 
+private:
     static map<int, string> dictionary;
     static vector<vector<Tile>> terrain;
     static Vector2 tileSize;
     static Vector2 position;
     static short maxLayer;
+
+public:
+    //Get the texture name via it's indice in the texture dictionary
+    static string* GetTextureName(int indice) { return &dictionary[indice]; }
+    static vector<vector<Tile>>* GetTerrain() { return &terrain; }
+    static Vector2 GetPosition() { return position; }
+    static short GetMaxLayer() { return maxLayer; }
+
+    static Vector2 GetTileSize() { return tileSize; }
+    static void SetTileSize(Vector2 newTileSize) { tileSize = newTileSize; }
 
 private:
 public:

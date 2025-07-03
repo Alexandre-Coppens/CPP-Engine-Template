@@ -15,7 +15,8 @@ private:
 	Vector2 scroll{};
 	
 private:
-    void CheckIfOutOfBound();
+	//Set this function in DrawScreen
+    //void CheckIfOutOfBound();
 
 public:
 	Engine();

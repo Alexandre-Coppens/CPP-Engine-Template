@@ -7,7 +7,7 @@ Actor::Actor(Vector2 _pos, Vector2 _size, ActorType _type, Texture2D* _sprite, C
 	position(_pos),
 	size(_size),
 	type(_type),
-	sprite(_sprite),
+	texture(_sprite),
 	color(_color),
 	name(""),
 	enabled(true)
@@ -21,14 +21,14 @@ Actor::~Actor(){
 void Actor::Start() {
 }
 
-void Actor::Update(Vector2* scroll) {
+void Actor::Update(Vector2* scroll){
 }
 
 //Only change Draw Function if it's not affected by scroll or others.
 void Actor::Draw(Vector2* scroll) {
-	Rectangle source{ 0, 0, sprite->width, sprite->height };
+	Rectangle source{ 0, 0, texture->width, texture->height };
 	Rectangle dest{ position.x - scroll->x, position.y - scroll->y, size.x, size.y };
-	DrawTexturePro(*sprite, source, dest, Vector2{ size.x * 0.5f, size.y * 0.5f }, 0, color);
+	DrawTexturePro(*texture, source, dest, Vector2{ size.x * 0.5f, size.y * 0.5f }, 0, color);
 }
 
 Actor* Actor::CreateActor(const string id, int layer,Actor* actor){
@@ -125,7 +125,7 @@ void Actor::DestroyActorList(){
 }
 
 void Actor::Destroy() {
-	needToDestroy = true;
+	onDestroyList = true;
 }
 
 void Actor::RemoveActorFromLists(Actor* actor) {

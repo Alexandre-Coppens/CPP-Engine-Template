@@ -16,18 +16,20 @@ private:
     float mouseScrollSpeed = 50;
     float mouseScrollMax{};
 
-public:
     bool open{ false };
     string currentTextureName{ "" };
+
+public:
+    string GetCurrentTextureName() { return currentTextureName; }
 
 private:
 public:
     UI_TilesMenu();
     ~UI_TilesMenu();
 
-    void Update(Vector2* scroll);
-    void Draw(Vector2* scroll);
-    void Clicked();
+    void Update(Vector2* scroll)override;
+    void Draw(Vector2* scroll)override;
+    void Clicked()override;
 
     void OpenTilesTab();
 };

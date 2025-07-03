@@ -2,10 +2,11 @@
 #include "AssetsList.h"
 #include "Terrain.h"
 
-UI_TilesMenu::UI_TilesMenu(){
-	type = ActorType::UI;
-	position = Vector2{ 0, GetScreenHeight() * 0.375f };
-	size = Vector2{ 30, GetScreenHeight() * 0.250f };
+UI_TilesMenu::UI_TilesMenu():
+Actor(Vector2{ 0, GetScreenHeight() * 0.375f },
+			Vector2{ 30, GetScreenHeight() * 0.250f }, 
+			ActorType::UI)
+{
 }
 
 UI_TilesMenu::~UI_TilesMenu(){
@@ -30,8 +31,8 @@ void UI_TilesMenu::Draw(Vector2* scroll){
 		Rectangle menuBackground{ 0, GetScreenHeight() - GetScreenHeight() * 0.95f, 300, GetScreenHeight() * 0.9f };
 		DrawRectanglePro(menuBackground, Vector2Zero(), 0, LIGHTGRAY);
 
-		Rectangle source{ 0, 0, sprite->width, sprite->height };
-		Rectangle dest{ 0, 0, Terrain::tileSize.x, Terrain::tileSize.y };
+		Rectangle source{ 0, 0, texture->width, texture->height };
+		Rectangle dest{ 0, 0, Terrain::GetTileSize().x, Terrain::GetTileSize().y};
 		Vector2 pos = Vector2{ menuBackground.x +15 + dest.width * 0.5f, menuBackground.y +15 - mouseScroll + dest.height};
 
 		if (menuBackground.x <= GetMouseX() && menuBackground.x + menuBackground.width >= GetMouseX() &&
@@ -39,7 +40,7 @@ void UI_TilesMenu::Draw(Vector2* scroll){
 			currentTextureName = ".";
 		}
 
-		for (auto i : AssetList::SpriteList) {
+		for (auto i : *AssetList::GetTextureList()) {
 			source = Rectangle{0, 0, (float)i.second.width, (float)i.second.height };
 			if (pos.x + dest.width >= menuBackground.width) {
 				pos.x = menuBackground.x + 15 + dest.width * 0.5f;
