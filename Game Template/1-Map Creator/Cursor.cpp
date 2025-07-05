@@ -1,6 +1,6 @@
 #include "Cursor.h"
 #include "Terrain.h"
-#include "AssetsList.h"
+#include "AssetList.h"
 #include "UI_TilesMenu.h"
 
 #include "rlgl.h"

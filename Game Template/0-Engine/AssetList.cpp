@@ -1,6 +1,7 @@
 #include <iostream>
 #include <filesystem>
-#include "AssetsList.h"
+#include <cassert>
+#include "AssetList.h"
 
 Texture2D AssetList::textureTemp;
 map<string, Music> AssetList::musicList;
@@ -8,6 +9,7 @@ AssetList* AssetList::instance = nullptr;
 map<string, Font> AssetList::textFont;
 map<string, Texture2D> AssetList:: textureList;
 map<string, Sound> AssetList:: soundList;
+map<Texture2D*, Animation> AssetList:: animationList;
 
 AssetList::AssetList() {
     if (textureList.size() > 0) return;
@@ -129,4 +131,36 @@ AssetList* AssetList::GetInstance() {
     return instance;
 }
 
+void AssetList::CreateAnimation(string textureName, Vector2 frameSize){
+    std::cout << "    -Creating animation table for " + textureName + "\n";
 
+    auto it = textureList.find(textureName);
+    if (it == textureList.end()) {
+        std::cout << "    -WARNING: Texture not found / Check texture name.. \n";
+        assert(false);
+        return;
+    }
+
+    Texture2D* texture = &textureList[textureName];
+    Image image = LoadImageFromTexture(*texture);
+
+    Sequence temp;
+    Animation animation;
+    animation.length = texture->height / frameSize.y;
+
+    for (int i = 0; i < animation.length; i++) {
+        for (int j = 0; j < (int)texture->width / frameSize.x; j++) {
+            Color pixel = GetImageColor(image, j * frameSize.x, i * frameSize.y);
+            if (pixel.r == 255 && pixel.g == 0 && pixel.b == 255 || (j + 1) * frameSize.x >= texture->width){
+                temp.length = pixel.r == 255 && pixel.g == 0 && pixel.b == 255 ? j : j + 1;
+                animation.sequences.push_back(temp);
+                std::cout << "    -Created animation n°" << animation.sequences.size() << " - Length: " << std::to_string(temp.length) << "\n";
+                break;
+            }
+        }
+    }
+
+    UnloadImage(image);
+
+    animationList[texture] = animation;
+}

@@ -23,6 +23,8 @@ void Engine::Start(){
 	Actor::CreateActor("Cursor", 0, new Cursor());
 	Actor::CreateActor("UITilesMenu", 0, new UI_TilesMenu());
 
+	//Create Animations here
+	AssetList::CreateAnimation("TestAnimation", Vector2{ 8, 8 });
 }
 
 void Engine::Update() {

@@ -135,7 +135,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="0-Engine\Actor.cpp" />
-    <ClCompile Include="0-Engine\AssetsList.cpp" />
+    <ClCompile Include="0-Engine\AssetList.cpp" />
     <ClCompile Include="0-Engine\Terrain.cpp" />
     <ClCompile Include="1-Map Creator\Cursor.cpp" />
     <ClCompile Include="1-Map Creator\Engine.cpp" />
@@ -145,12 +145,13 @@
   <ItemGroup>
     <ClInclude Include="0-Engine\Actor.h" />
     <ClInclude Include="0-Engine\ActorIncludes.h" />
-    <ClInclude Include="0-Engine\AssetsList.h" />
+    <ClInclude Include="0-Engine\AssetList.h" />
     <ClInclude Include="0-Engine\DrawScreen.h" />
     <ClInclude Include="0-Engine\Terrain.h" />
     <ClInclude Include="1-Map Creator\Cursor.h" />
     <ClInclude Include="1-Map Creator\Engine.h" />
     <ClInclude Include="1-Map Creator\UI_TilesMenu.h" />
+    <ClInclude Include="Animation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

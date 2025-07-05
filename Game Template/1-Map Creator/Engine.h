@@ -4,7 +4,7 @@
 
 #include <string>
 #include <vector>
-#include "AssetsList.h"
+#include "AssetList.h"
 
 using std::string;
 using std::vector;

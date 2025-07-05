@@ -1,5 +1,5 @@
 #include "UI_TilesMenu.h"
-#include "AssetsList.h"
+#include "AssetList.h"
 #include "Terrain.h"
 
 UI_TilesMenu::UI_TilesMenu():
