@@ -48,6 +48,9 @@
     <ClCompile Include="1-Map Creator\UI_TilesMenu.cpp">
       <Filter>Fichiers sources\Game</Filter>
     </ClCompile>
+    <ClCompile Include="1-Map Creator\AnimationTest.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="0-Engine\Actor.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Fichiers de ressources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationTest.h">
+      <Filter>Fichiers de ressources\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

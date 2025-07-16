@@ -147,12 +147,13 @@ void AssetList::CreateAnimation(string textureName, Vector2 frameSize){
     Sequence temp;
     Animation animation;
     animation.length = texture->height / frameSize.y;
+    animation.size = frameSize;
 
     for (int i = 0; i < animation.length; i++) {
         for (int j = 0; j < (int)texture->width / frameSize.x; j++) {
             Color pixel = GetImageColor(image, j * frameSize.x, i * frameSize.y);
             if (pixel.r == 255 && pixel.g == 0 && pixel.b == 255 || (j + 1) * frameSize.x >= texture->width){
-                temp.length = pixel.r == 255 && pixel.g == 0 && pixel.b == 255 ? j : j + 1;
+                temp.length = pixel.r == 255 && pixel.g == 0 && pixel.b == 255 ? j -1  : j;
                 animation.sequences.push_back(temp);
                 std::cout << "    -Created animation n°" << animation.sequences.size() << " - Length: " << std::to_string(temp.length) << "\n";
                 break;

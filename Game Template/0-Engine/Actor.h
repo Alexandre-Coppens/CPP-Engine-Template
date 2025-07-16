@@ -32,6 +32,7 @@ protected:
     Vector2 size{ 0,0 };
     short layer{ 0 };
     Texture2D* texture{ nullptr };
+    AnimationPlayer animation{ NULL };
     Color color{ WHITE };
     ActorType type{ ActorType::None };
 
@@ -81,7 +82,7 @@ public:
     virtual void Start();
     virtual void Update(Vector2* scroll);
     virtual void Draw(Vector2* scroll);
-
+    
     //Put the actor on the Destroy list for next Update
     void Destroy();
     static void RemoveActorFromLists(Actor* go);

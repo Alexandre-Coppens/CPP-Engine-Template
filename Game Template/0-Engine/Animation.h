@@ -26,6 +26,7 @@ private:
     uint8_t currentFrame{ 0 };
     int8_t speed{ 24 };
     bool play{ true };
+    float timer = 0;
 
 public:
 
@@ -34,17 +35,28 @@ public:
     AnimationPlayer(Animation* animation) {
         this->animation = animation;
     }
-    ~AnimationPlayer();
+    ~AnimationPlayer() {
+    }
 
     void inline PlayAnimation() {
         if (!play)return;
-        if (currentFrame == animation->sequences[currentSequence].length) currentFrame = 0;
-        if (currentFrame < 0) currentFrame = animation->sequences[currentSequence].length - 1;
-        currentFrame++;
+        if (timer >= 1.0f / speed) {
+            if (currentFrame == animation->sequences[currentSequence].length) currentFrame = 0;
+            else if (currentFrame < 0) currentFrame = animation->sequences[currentSequence].length - 1;
+            else currentFrame++;
+            timer = 0;
+        }
+        else {
+            timer += GetFrameTime();
+        }
+    }
+
+    void inline SetAnimation(Animation* animation) {
+        this->animation = animation;
     }
 
     Rectangle GetAnimationRect() {
-        return Rectangle{ currentFrame * animation->size.x, currentFrame * animation->size.y, animation->size.x, animation->size.y };
+        return Rectangle{ currentFrame * animation->size.x, currentSequence * animation->size.y, animation->size.x, animation->size.y };
     }
 
     void SetSequence(uint8_t index) {

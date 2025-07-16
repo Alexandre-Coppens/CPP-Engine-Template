@@ -19,12 +19,13 @@ void Engine::Start(){
 	terrain.SetTileSize(Vector2{ 50,50 });
 	scroll = { GetScreenWidth() * 0.5f ,GetScreenHeight() * 0.5f };
 
+	//Create Animations here
+	AssetList::CreateAnimation("TestAnimation", Vector2{ 8, 8 });
+
 	//Create Objects Here
 	Actor::CreateActor("Cursor", 0, new Cursor());
 	Actor::CreateActor("UITilesMenu", 0, new UI_TilesMenu());
-
-	//Create Animations here
-	AssetList::CreateAnimation("TestAnimation", Vector2{ 8, 8 });
+	Actor::CreateActor("ATest", 10, new ATest());
 }
 
 void Engine::Update() {
@@ -40,7 +41,7 @@ void Engine::Update() {
 
 void Engine::Draw() {
 	BeginDrawing();
-	ClearBackground(GREEN);
+	ClearBackground(RAYWHITE);
 	DrawScreen(&scroll);
 	EndDrawing();
 }

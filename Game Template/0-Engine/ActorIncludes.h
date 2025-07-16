@@ -8,3 +8,4 @@
 
 #include "Cursor.h"
 #include "UI_TilesMenu.h"
+#include "AnimationTest.h"
