@@ -20,11 +20,20 @@ void Cursor::Update(Vector2* scroll) {
 	if (IsMouseButtonDown(2)) {
 		*scroll = Vector2Subtract(*scroll, GetMouseDelta());
 	}
-
 	scroll->x -= GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X) * scrollSpeed.x * GetFrameTime();
 	scroll->y -= GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) * scrollSpeed.y * GetFrameTime();
 
-	//Rotation + Layer change
+	//Zoom
+	if (GetMouseWheelMove() > 0 && IsKeyDown(KEY_LEFT_CONTROL)) {
+		Terrain::SetTileSize(Vector2ClampValue(Vector2SubtractValue(Terrain::GetTileSize(), -2), 1, 500));
+		*scroll = Vector2Add(*scroll, Vector2Scale(Vector2Normalize(Vector2{ GetMousePosition().x - GetScreenWidth() * 0.5f, GetMousePosition().y - GetScreenHeight() * 0.5f }), Vector2Distance(GetMousePosition(), Vector2{ GetScreenWidth() * 0.5f,GetScreenHeight() * 0.5f }) * 0.2f));
+	}
+	if (GetMouseWheelMove() < 0 && IsKeyDown(KEY_LEFT_CONTROL)) {
+		Terrain::SetTileSize(Vector2ClampValue(Vector2SubtractValue(Terrain::GetTileSize(), 2), 1, 500));
+		*scroll = Vector2Add(*scroll, Vector2Scale(Vector2Normalize(Vector2{ GetMousePosition().x - GetScreenWidth() * 0.5f, GetMousePosition().y - GetScreenHeight() * 0.5f }), Vector2Distance(GetMousePosition(), Vector2{ GetScreenWidth() * 0.5f,GetScreenHeight() * 0.5f }) * 0.2f));
+	}
+
+	//Layer change
 	if (IsKeyPressed(KEY_UP) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_LEFT_FACE_UP)) {
 		if (placementLayer == Terrain::GetMaxLayer() - 1) placementLayer = 0;
 		else placementLayer++;
@@ -33,6 +42,8 @@ void Cursor::Update(Vector2* scroll) {
 		if (placementLayer == 0) placementLayer = Terrain::GetMaxLayer() - 1;
 		else placementLayer--;
 	}
+
+	//Rotation
 	if (IsKeyPressed(KEY_Q) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_LEFT_FACE_LEFT)) {
 		if (placementRotation == 0) placementRotation = 270;
 		else placementRotation -= 90;
@@ -42,7 +53,7 @@ void Cursor::Update(Vector2* scroll) {
 		else placementRotation += 90;
 	}
 
-	//Tiles placement
+	//Mouse Tiles placement
 	Vector2 mPos{ (int)floor((scroll->x + GetMouseX()) / Terrain::GetTileSize().x), (int)floor((scroll->y + GetMouseY()) / Terrain::GetTileSize().y)};
 	if (IsMouseButtonPressed(0)) {
 		UI_TilesMenu* menu = static_cast<UI_TilesMenu*>(GetActorWithName("UITilesMenu"));
@@ -64,6 +75,8 @@ void Cursor::Update(Vector2* scroll) {
 		}
 	}
 	if (IsMouseButtonPressed(1)) Terrain::RemoveTile(placementLayer, mPos);
+
+	//Controller Tiles placement
 	Vector2 cPos{ (int)floor((scroll->x + GetScreenWidth() * 0.5f) / Terrain::GetTileSize().x), (int)floor((scroll->y + Terrain::GetTileSize().y * 0.5f + GetScreenWidth() * 0.5f) / Terrain::GetTileSize().y)};
 	if (IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN)) Terrain::AddNewTile(placementLayer, placementRotation, cPos, AssetList::GetNameAtPosition(currentTexture));
 	if (IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_RIGHT)) Terrain::RemoveTile(placementLayer, cPos);
@@ -75,9 +88,9 @@ void Cursor::Update(Vector2* scroll) {
 
 void Cursor::Draw(Vector2* scroll) {
 	rlPushMatrix();
-	rlTranslatef(0 - scroll->x, 25 * 50 - scroll->y, 0);
+	rlTranslatef(0 - scroll->x, 25 * Terrain::GetTileSize().x - scroll->y, 0);
 	rlRotatef(90, 1, 0, 0);
-	DrawGrid(100, 50);
+	DrawGrid(100, Terrain::GetTileSize().x);
 	rlPopMatrix();
 
 	DrawText(("X. " + to_string((scroll->x - GetMouseX()) / Terrain::GetTileSize().x)).c_str(), 10, 10, 20, GRAY);
@@ -89,7 +102,7 @@ void Cursor::Draw(Vector2* scroll) {
 	Texture2D* sprite = AssetList::GetTexture(AssetList::GetNameAtPosition(currentTexture));
 	DrawTexturePro(*sprite,
 		Rectangle{ 0, 0, (float)sprite->width, (float)sprite->height },
-		Rectangle{ 500, 50, 80, 80 },
+		Rectangle{ (float)GetScreenWidth() - 100, 100, 80, 80},
 		Vector2{ 40,40 },
 		placementRotation,
 		WHITE);

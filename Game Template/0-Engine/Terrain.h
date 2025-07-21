@@ -26,6 +26,8 @@ private:
     static Vector2 position;
     static short maxLayer;
 
+    static Terrain* instance;
+
 public:
     //Get the texture name via it's indice in the texture dictionary
     static string* GetTextureName(int indice) { return &dictionary[indice]; }
@@ -42,6 +44,8 @@ public:
     ~Terrain();
 
     void Update();
+
+    static Terrain* GetInstance();
 
     static void AddNewTile(int layer, int rotation, Vector2 pos, string name);
     static void RemoveTile(int layer, Vector2 pos);

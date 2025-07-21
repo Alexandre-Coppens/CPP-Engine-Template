@@ -1,6 +1,5 @@
 #include <iostream>
-#include "Engine.h"
-#include "Terrain.h"
+#include "M_Engine.h"
 #include "DrawScreen.h"
 
 //Put here all the other includes
@@ -9,14 +8,16 @@
 using std::cout;
 using std::to_string;
 
-Terrain terrain;
-
-Engine::Engine() {
+M_Engine::M_Engine() {
 }
 
-void Engine::Start(){
+M_Engine::~M_Engine(){
+}
+
+void M_Engine::Start(){
+	terrain = Terrain::GetInstance();
 	assets = AssetList::GetInstance();
-	terrain.SetTileSize(Vector2{ 50,50 });
+	terrain->SetTileSize(Vector2{ 50,50 });
 	scroll = { GetScreenWidth() * 0.5f ,GetScreenHeight() * 0.5f };
 
 	//Create Animations here
@@ -28,7 +29,7 @@ void Engine::Start(){
 	Actor::CreateActor("ATest", 10, new ATest());
 }
 
-void Engine::Update() {
+void M_Engine::Update() {
 
 	vector<Actor*> actorList = Actor::GetAllActors();
 	for (int i = 0; i < actorList.size(); i++) {
@@ -39,7 +40,7 @@ void Engine::Update() {
 	}
 }
 
-void Engine::Draw() {
+void M_Engine::Draw() {
 	BeginDrawing();
 	ClearBackground(RAYWHITE);
 	DrawScreen(&scroll);

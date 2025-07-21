@@ -14,6 +14,7 @@ vector<vector<Terrain::Tile>> Terrain::terrain;
 Vector2 Terrain::tileSize{ 50,50 };
 Vector2 Terrain::position{ 0,0 };
 short Terrain::maxLayer{ 5 };
+Terrain* Terrain::instance = nullptr;
 //void Terrain::SaveMap(string filename);
 //void Terrain::LoadMap(string filename);
 
@@ -25,6 +26,13 @@ Terrain::~Terrain(){
 
 void Terrain::Update()
 {
+}
+
+Terrain* Terrain::GetInstance() {
+	if (instance == nullptr) {
+		instance = new Terrain();
+	}
+	return instance;
 }
 
 void Terrain::AddNewTile(int layer,  int rotation, Vector2 pos, string name) {

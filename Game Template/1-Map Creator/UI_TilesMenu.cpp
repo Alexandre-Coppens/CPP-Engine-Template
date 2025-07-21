@@ -1,25 +1,31 @@
 #include "UI_TilesMenu.h"
 #include "AssetList.h"
 #include "Terrain.h"
+#include <iostream>
 
 UI_TilesMenu::UI_TilesMenu():
-Actor(Vector2{ 0, GetScreenHeight() * 0.375f },
-			Vector2{ 30, GetScreenHeight() * 0.250f }, 
+Actor(Vector2{ 300, GetScreenHeight() * 0.450f },
+			Vector2{ 0, GetScreenHeight() * 0.100f }, 
 			ActorType::UI)
 {
+	open = true;
 }
 
 UI_TilesMenu::~UI_TilesMenu(){
 }
 
 void UI_TilesMenu::Update(Vector2* scroll){
-	//Change textures
-	if (GetMouseWheelMove() > 0){
+	//Scroll throught textures
+	if (GetMouseWheelMove() > 0 && !IsKeyDown(KEY_LEFT_CONTROL)){
 		mouseScroll = Clamp(mouseScroll - mouseScrollSpeed, 0, mouseScrollMax);
 	}
-	if (GetMouseWheelMove() < 0) {
+	if (GetMouseWheelMove() < 0 && !IsKeyDown(KEY_LEFT_CONTROL)) {
 		mouseScroll = Clamp(mouseScroll + mouseScrollSpeed, 0, mouseScrollMax);
 	}
+
+	/*if (IsKeyPressed(KEY_SPACE)) {
+		Clicked();
+	}*/
 }
 
 void UI_TilesMenu::Draw(Vector2* scroll){
@@ -28,12 +34,12 @@ void UI_TilesMenu::Draw(Vector2* scroll){
 	if (open) {
 		currentTextureName = "";
 
-		Rectangle menuBackground{ 0, GetScreenHeight() - GetScreenHeight() * 0.95f, 300, GetScreenHeight() * 0.9f };
+		Rectangle menuBackground{ 0, GetScreenHeight() * 0.125f, 300, GetScreenHeight() * 0.75f };
 		DrawRectanglePro(menuBackground, Vector2Zero(), 0, LIGHTGRAY);
 
 		Rectangle source{ 0, 0, texture->width, texture->height };
 		Rectangle dest{ 0, 0, Terrain::GetTileSize().x, Terrain::GetTileSize().y};
-		Vector2 pos = Vector2{ menuBackground.x +15 + dest.width * 0.5f, menuBackground.y +15 - mouseScroll + dest.height};
+		Vector2 pos = Vector2{ menuBackground.x +15 + dest.width * 0.5f, menuBackground.y +65 - mouseScroll + dest.height};
 
 		if (menuBackground.x <= GetMouseX() && menuBackground.x + menuBackground.width >= GetMouseX() &&
 			menuBackground.y <= GetMouseY() && menuBackground.y + menuBackground.height >= GetMouseY()) {
@@ -46,7 +52,7 @@ void UI_TilesMenu::Draw(Vector2* scroll){
 				pos.x = menuBackground.x + 15 + dest.width * 0.5f;
 				pos.y += dest.height + 15;
 			}
-			if (pos.y - dest.height * 0.5f > menuBackground.y && pos.y + dest.height * 0.5f < menuBackground.x + menuBackground.height) {
+			if (pos.y - dest.height * 1.5f > menuBackground.y && pos.y + dest.height * 0.5f  < menuBackground.y + menuBackground.height) {
 				dest.x = pos.x;
 				dest.y = pos.y;
 				DrawTexturePro(i.second, source, dest, Vector2{ dest.width * 0.5f, dest.height * 0.5f }, 0, color);
@@ -62,6 +68,7 @@ void UI_TilesMenu::Draw(Vector2* scroll){
 }
 
 void  UI_TilesMenu::Clicked(){
+	return;
 	open = !open;
 	mouseScroll = 0;
 	currentTextureName = "";
