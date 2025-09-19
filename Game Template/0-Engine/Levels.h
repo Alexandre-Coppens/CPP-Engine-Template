@@ -22,6 +22,8 @@ protected:
     string GetName() { return name; }
     uint8_t GetID() { return levelID; }
 
+    void AddNewActorToList(Actor* _actor) { LevelActorList[_actor->GetName()] = _actor; }
+
 public:
     static map<int, Level*> LevelList;
     static uint8_t currentLevel;
@@ -35,9 +37,7 @@ protected:
 public:
     Level(string _name);
 
-    void Start();
-    void Update();
-    void Draw();
+    virtual void Start();
 
     //Unload this level and load the ID one
     void LoadLevelbyID(int id);
