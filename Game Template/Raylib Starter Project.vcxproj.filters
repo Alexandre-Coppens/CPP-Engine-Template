@@ -60,12 +60,18 @@
     <ClCompile Include="2-Game\G_Engine.cpp">
       <Filter>Fichiers sources\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Levels.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameIncludes.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="0-Engine\Actor.h">
       <Filter>Fichiers de ressources\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="0-Engine\ActorIncludes.h">
+    <ClInclude Include="0-Engine\MapIncludes.h">
       <Filter>Fichiers de ressources\Map Creator</Filter>
     </ClInclude>
     <ClInclude Include="0-Engine\AssetList.h">
@@ -94,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="2-Game\G_Engine.h">
       <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels.h">
+      <Filter>Fichiers de ressources\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

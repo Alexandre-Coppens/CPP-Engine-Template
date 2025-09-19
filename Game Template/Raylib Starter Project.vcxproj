@@ -144,10 +144,12 @@
     <ClCompile Include="1-Map Creator\main.cpp" />
     <ClCompile Include="1-Map Creator\UI_TilesMenu.cpp" />
     <ClCompile Include="2-Game\G_Engine.cpp" />
+    <ClCompile Include="GameIncludes.h" />
+    <ClCompile Include="Levels.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="0-Engine\Actor.h" />
-    <ClInclude Include="0-Engine\ActorIncludes.h" />
+    <ClInclude Include="0-Engine\MapIncludes.h" />
     <ClInclude Include="0-Engine\AssetList.h" />
     <ClInclude Include="0-Engine\DrawScreen.h" />
     <ClInclude Include="0-Engine\Terrain.h" />
@@ -157,6 +159,7 @@
     <ClInclude Include="2-Game\G_Engine.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationTest.h" />
+    <ClInclude Include="Levels.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

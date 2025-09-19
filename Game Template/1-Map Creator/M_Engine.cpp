@@ -3,7 +3,7 @@
 #include "DrawScreen.h"
 
 //Put here all the other includes
-#include "ActorIncludes.h"
+#include "MapActorIncludes.h"
 
 using std::cout;
 using std::to_string;

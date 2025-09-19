@@ -1,9 +1,8 @@
 #include <iostream>
 #include "G_Engine.h"
-#include "DrawScreen.h"
 
 //Put here all the other includes
-#include "ActorIncludes.h"
+#include "GameIncludes.h"
 
 using std::cout;
 using std::to_string;
@@ -23,12 +22,11 @@ void G_Engine::Start() {
 	//Create Animations here
 	AssetList::CreateAnimation("TestAnimation", Vector2{ 8, 8 });
 
-	//Create Objects Here
-	//Actor::CreateActor("Cursor", 0, new Cursor());
+	//Create Levels Here their IDs are in order of creation
+	//Level level0 {"levelName"});
 }
 
 void G_Engine::Update() {
-
 	vector<Actor*> actorList = Actor::GetAllActors();
 	for (int i = 0; i < actorList.size(); i++) {
 		if (actorList[i]->GetOnDestroyList()) {
